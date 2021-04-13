@@ -4,13 +4,13 @@ import './QuoteCard.css';
 export default function QuoteCard({ quote, character,  image }) {
  
  return (
- <div className="QuoteCard">
+ <figure className="QuoteCard">
     <img src={image} alt={character} />
-    <div>
+    <figcaption>
       <blockquote>{quote}</blockquote>
       <cite>{character}</cite>
-    </div>
-  </div>
+      </figcaption>
+  </figure>
  )
 };
 
