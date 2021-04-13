@@ -1,29 +1,40 @@
-import React from 'react'
-import Quote from './components/QuoteCard.js'
+import React, { useState, useEffect } from "react"
+import QuoteCard from "./components/QuoteCard"
+import axios from "axios"
 import './App.css';
-import axios from 'axios'
+
 
 
 
 
 function App() {
 
-  const [quote, SetQuote] = useState('')
+const [quote, setQuote] = useState('');
 
-  const getQuote = () =>{
+const getQuote = () => {
 
-      axios.get(`https://simpsons-quotes-api.herokuapp.com/quotes`)
-      .then((response) => response.data)
-      .then((data) => {
-          console.log([data.results]);
-          }) }
+  axios.get(`https://simpsons-quotes-api.herokuapp.com/quotes`)
+  .then((response) => response.data)
+  .then((data) =>{
+    setQuote(data.results);
+  });
+};
+
+useEffect(() => {
+  getQuote();
+}, []);
 
   return (
     <div className="App">
-        <quoteCard 
-        quote={quote.quote}
-        character={quote.character} />
-        <button>Get a new quote</button>
+
+      <h1>Quote from the Simpson! </h1>
+        <QuoteCard 
+        image={QuoteCard.image}
+        character={QuoteCard.character}
+        quote={QuoteCard.quote}/>
+
+        <button type="button" onClick={getQuote}>Get a new quote</button>
+
     </div>
   );
 }
